@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route , Outlet,createBrowserRouter,RouterProvide
 import Mint from './components/Mint.jsx';
 import Test from "./components/Test.jsx";
 import Home from "./components/Home.jsx";
+import Collection from "./components/Collection.jsx";
 import './App.css'
 
 function App() {
@@ -44,6 +45,10 @@ function App() {
     {
       path:"/test",
       element:<Test/>
+    },
+    {
+      path:"/nfts",
+      element:<Collection/>
     },
     {
       path:"/",
