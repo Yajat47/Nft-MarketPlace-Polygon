@@ -2,6 +2,7 @@ import { useState , useEffect } from "react";
 import abi from "../contracts/MarketContract.json";
 import { ethers   } from "ethers";
 import axios from 'axios';
+import Navbar from "./Navbar.jsx";
 
 const Mint = ({Wadd}) => {
 const [isWalletConnected, setIsWalletConnected] = useState(false);
@@ -152,36 +153,48 @@ const [isWalletConnected, setIsWalletConnected] = useState(false);
 
 
     return ( 
-        <div>
-            <div class='text-lg font-black'>MINT</div>
-            <div>Address is {customerAddress}</div>
+        <div class='bg-black w-screen h-screen'>
+            <Navbar/>
+            <div class='flex justify-center text-2xl font-extrabold text-white mt-20 p-4  '>MINT NFT</div>
+            <div class='m-6 p-4 bg-white  rounded-xl mt-20 ml-36 mr-36 h-fit  '>
+            
+            <div class='flex justify-center text-2xl font-semibold text-purple-700 m-4 p-2'>NFT Details</div>
             <form className="formren" class='mt-8 p-6 text-lg '>
-                <label for="name">Name</label>
-                <input type="text" name="name" id="name" onChange={handleChange}  placeholder="Name"></input>
-
-                <label for="price">Price</label>
-                <input type="text" name="price" id="price" onChange={handleChange} placeholder="Price"></input>
-                <label for="img"> NFT Image</label>
-                {selectedImage && (
-                    <div>
-                        <img alt="not fount" width={"250px"} src={URL.createObjectURL(selectedImage)} />
-                    </div>
-                )}
-                <br />
-
-                <br />
+                <div class='flex justify-center '>
+                <label class='text-lg font-medium ' for="name">Name :</label>
+                <input class='ml-6 border-2 border-purple-700 rounded-lg' type="text" name="name" id="name" onChange={handleChange}  placeholder=" Ntf Name"></input>
+                </div>
+                <div class='mt-8 flex justify-center '>
+                <label class='text-lg font-medium ' for="price">Price (in Wei) :</label>
+                <input class='ml-6 border-2 border-purple-700 rounded-lg' type="text" name="price" id="price" onChange={handleChange} placeholder=" Price"></input>
+                </div>
+                <div class='mt-12 flex justify-center '>
+                <label class='text-lg font-medium ' for="img"> NFT Image</label>
                 <input
                     type="file"
                     name="imgurl"
+                    class='ml-6  '
                     onChange={(event) => {
                         // console.log(event.target.files[0]);
                           setSelectedImage(event.target.files[0]);
                        // sendFileToIPFS(event, event.target.files[0]);
                     }}
                 />
-            
-                <button class='m-6 p-2 text-lg font-semibold text-purple-500' onClick={(e)=>handleSubmit(e)} >Submit </button>
+                {selectedImage && (
+                    <div class='mt-8 mb-4 flex justify-center border-2 border-purple-700  '>
+                        <img alt="not fount" width={"250px"} src={URL.createObjectURL(selectedImage)} />
+                    </div>
+                )}
+                </div>
+                <br />
+
+                <br />
+               
+                <div class='flex justify-center '>
+                <button class='bg-purple-700 m-6 p-2  w-36 text-lg font-semibold text-white rounded-lg' onClick={(e)=>handleSubmit(e)} >Mint NFT </button>
+                </div>
             </form>
+            </div>
         </div>
      );
 }

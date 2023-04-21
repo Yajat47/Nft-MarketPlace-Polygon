@@ -2,7 +2,7 @@ import { useState , useEffect } from "react";
 import abi from "../contracts/MarketContract.json";
 import { ethers   } from "ethers";
 import axios from 'axios';
-
+import Navbar from "./Navbar.jsx";
 
 const Collection = () => {
     const [nftdata , setdata]= useState([]);
@@ -52,21 +52,21 @@ const Collection = () => {
             listNft();
         }
     },[nftload]);
-    return ( 
-        <div class='text-lg font-black text-purple-500 bg-black m-6 p-4 '>
-        <div >NFT MARKET PLACE</div>
+    return (
+        <div class='bg-black w-screen h-screen'>
+        <Navbar /> 
+        <div class='text-lg font-black text-purple-500 bg-black m-6 p-4 mt-12 '>
+       
         <div>
             <div>
-                <div class='text-lg font-bold m-6 p-2 '>My NFTs  </div>
+                <div class='text-2xl flex justify-center font-bold m-6 p-2 '>My NFTs  </div>
                 {nftload && <div>
-                    Data Loaded
                     <div class=' flex justify-center m-4 mt-12 p-6 '>
                     <ul>            
                     {
                 nftdata.map((post)=>(
                     
         <div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow mt-6 " key={post.tokenId}>
-                        <div class="">Seller : {post.seller}</div>
 
             <a href="#">
                 <img class="p-8 w-72 h-80 rounded-lg object-contain " src={post.image} alt="NFT image" />
@@ -78,7 +78,6 @@ const Collection = () => {
                 <div class="flex items-center justify-between">
                     <span class="text-3xl font-bold text-gray-900 mt-4 text-blue-700 ">{post.price}  Eth</span>
                 </div>
-                <div class="">Owner : {post.owner}</div>
 
             </div>
         </div>
@@ -91,6 +90,7 @@ const Collection = () => {
             </div>
           
             
+        </div>
         </div>
         </div>
      );

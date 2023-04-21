@@ -2,6 +2,7 @@ import { useState , useEffect } from "react";
 import abi from "../contracts/MarketContract.json";
 import { ethers   } from "ethers";
 import axios from 'axios';
+import Navbar from "./Navbar.jsx";
 
 
 const Home = () => {
@@ -100,13 +101,15 @@ const Home = () => {
         }
     },[nftload]);
     return ( 
-        <div class='text-lg font-black text-purple-500 bg-black m-6 p-4 rounded-xl  '>
-        <div >NFT MARKET PLACE</div>
+       <div class='bg-black w-screen max-h-full'>
+       <Navbar/>
+        <div class='text-3xl font-black text-purple-500  m-6 p-4 rounded-xl mt-16 '>
+        {/* <div class='flex justify-center text-xl text-white font-semibold' > Welcome :  {isWalletConnected && <span>{customerAddress}</span> }</div> */}
         { !isWalletConnected && 
-        <div class='flex justify-center m-6 p-2 rounded-x;'>
-            <div class="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 ">
-        <h5 class="mb-3 text-base font-semibold text-gray-900 md:text-xl ">
-            Connect wallet
+        <div class='flex justify-center m-6 p-2 rounded-x h-screen'>
+            <div class="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 h-fit ">
+        <h5 class="flex justify-center mb-3 text-base font-semibold text-gray-900 md:text-xl ">
+            Login with Metamask Wallet
         </h5>
         <p class="text-sm font-normal text-gray-500 ">Connect MetaMask wallet provider or create a new MetaMask account.</p>
         <ul class="my-4 space-y-3">
@@ -126,35 +129,34 @@ const Home = () => {
 
         { isWalletConnected && 
         <div>
-           <span class='m-4 p-2 text-white text-lg font-regular '>Account : {customerAddress}</span> 
+           {/* <span class='m-4 p-2 text-white text-lg font-regular '>Account : {customerAddress}</span>  */}
             <div>
-                <div class='text-lg font-bold m-6 p-2 '>All NFTS </div>
+                <div class='text-3xl flex justify-center font-bold m-6 p-2 '>Listed NFTS </div>
                 {nftload && <div>
-                    Data Loaded
+                    
                     <div class=' flex justify-center m-4 mt-12 p-6 '>
                     <ul>            
                     {
                 nftdata.map((post)=>(
                     
-        <div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow mt-6 " key={post.tokenId}>
-            <div class="">Seller : {post.seller}</div>
+        <div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow mt-6 border-4 border-purple-800 shadow-lg shadow-purple-700 " key={post.tokenId}>
+            {/* <div class="flex max-w-72">Seller : {post.seller}</div> */}
             <a href="#">
-                <img class="p-8 w-72 h-80 rounded-lg object-contain " src={post.image} alt="NFT image" />
+                <img class="p-8 w-fit h-fit rounded-lg object-contain " src={post.image} alt="NFT image" />
             </a>
             <div class="px-5 pb-5">
                 <a href="#">
-                    <h5 class="text-xl font-semibold tracking-tight text-gray-900 ">{post.name}</h5>
+                    <h5 class="text-3xl font-bold tracking-tight text-purple-900  ">{post.name}</h5>
                 </a>
-                <div class="">Owner : {post.owner}</div>
+                <div class="w-full m-2 bg-gray-400 h-px"></div>
 
-                <div class="flex items-center justify-between">
-                    <span class="text-3xl font-bold text-gray-900 mt-4 ">{post.price} Eth</span>
+                <div class="flex justify-center text-2xl font-mono  text-gray-700 mt-4 ">{post.price} Eth</div>
+
+                 <div class='flex justify-center'  > 
                     <button
                     onClick={()=>sellNft(post.tokenId , post.price)}
-                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">Buy</button>
-                
-                
-                </div>
+                    class=" mt-8 text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">Buy</button>
+               </div>
             </div>
         </div>
 
@@ -164,12 +166,12 @@ const Home = () => {
                     </div>
                     </div>}
             </div>
-            <button class='text-md font-semibold bg-white text-purple-800 m-4 p-2 ' onClick={()=>window.location.replace("/mint")}>Mint NFT</button>
-            <button class='text-md font-semibold bg-white text-purple-800 m-4 p-2 ' onClick={()=>window.location.replace("/nfts")}>Owned NFTs</button>
+        
 
             
         </div>
             }
+        </div>
         </div>
      );
 }
