@@ -9,34 +9,7 @@ import Collection from "./components/Collection.jsx";
 import './App.css'
 
 function App() {
-  const [isWalletConnected, setIsWalletConnected] = useState(false);
-  const [customerAddress, setCustomerAddress] = useState("");
-  const contractAddress = "0xFDD8eBd6C370bD398ad4477C585Cf68401A43b52";
-  const contractAbi = abi.abi;
-
-  // useEffect(() => {
-  //   checkIfWalletIsConnected();
-    
-  // }, [isWalletConnected]);
-
-  const checkIfWalletIsConnected = async ()=> {
-    try {
-      if(window.ethereum) {
-        const accounts = await window.ethereum.request({method:'eth_requestAccounts'});
-        const account = accounts[0];
-        setIsWalletConnected(true);
-        setCustomerAddress(account);
-        console.log("Account Connected ");
-      }
-      else {
-        window.alert("MetaMask Login Failed");
-        console.log("Metamask FAil");
-      }
-    } 
-    catch (err) {
-      console.log(err);
-    }
-  }
+  
   const router = createBrowserRouter([
     {
       path:"/mint",
@@ -64,7 +37,7 @@ function App() {
 
   return (
     <div className="App">
-       <div>
+       <div class=''>
         <RouterProvider router={router}/>
         </div>  
     </div>

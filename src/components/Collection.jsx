@@ -7,7 +7,7 @@ import axios from 'axios';
 const Collection = () => {
     const [nftdata , setdata]= useState([]);
     const [nftload , setload] = useState(false);
-    const contractAddress = "0xFDD8eBd6C370bD398ad4477C585Cf68401A43b52";
+    const contractAddress = "0x57522B08aAFA24DeE021DE65087b5a4f629f9EcD";
     const contractAbi = abi.abi;
     const listNft = async()=>{
         if(window.ethereum){
@@ -18,7 +18,7 @@ const Collection = () => {
             const items = await Promise.all(txn.map(async i => {
                 
                 const tokenURI = await contractInst.tokenURI(i.tokenId);
-                if(tokenURI != 'absctest'){
+               
                 //https://gateway.pinata.cloud/ipfs/QmbWymokvmS4YotFjpMy4pjwbysY8QuzcQKh24udajzorx
                 let tokenURI2 = "https://ipfs.io"+tokenURI.slice(28);
                 //console.log(tokenURI2);
@@ -38,9 +38,9 @@ const Collection = () => {
                 }
 
                 return item;
-            }
+            
             }))
-            let i2 =items.shift();
+           
             setdata(items);
             setload(true);
             console.log(items);

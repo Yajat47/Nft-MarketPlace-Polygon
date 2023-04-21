@@ -7,7 +7,7 @@ const Mint = ({Wadd}) => {
 const [isWalletConnected, setIsWalletConnected] = useState(false);
   const [customerAddress, setCustomerAddress] = useState();
   const [imguri, seturi] = useState(null);
-  const contractAddress = "0xFDD8eBd6C370bD398ad4477C585Cf68401A43b52";
+  const contractAddress = "0x57522B08aAFA24DeE021DE65087b5a4f629f9EcD";
   const contractAbi = abi.abi;
 
   const [nftdet, setdet] = useState(
@@ -125,13 +125,14 @@ const [isWalletConnected, setIsWalletConnected] = useState(false);
 
     //massage the params to be sent to the create NFT request
     const price = ethers.utils.parseUnits(nftdet.price, 'ether')
-    let listingPrice = await contractInst.getCurrentToken();
+    let listingPrice = await contractInst.getListPrice();
     listingPrice = listingPrice.toString();
-    console.log(" Current Token ID",listingPrice);
-    let transaction = await contractInst.createToken(img, nftdet.price, { value: ethers.utils.parseEther("0.001") ,gasLimit: 3000000, })
+    const ethValue = ethers.utils.formatEther(listingPrice);
+    console.log(" Current Token ID",ethValue);
+    let transaction = await contractInst.createToken(img, nftdet.price, { value: ethers.utils.parseEther(ethValue) ,gasLimit: 3000000, })
     await transaction.wait();
     console.log(transaction.hash);
-    alert("Successfully listed your NFT! Hash is" ,transaction.hash );
+    alert("Successfully listed your NFT!");
     }
   }
 
